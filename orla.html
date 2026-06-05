@@ -32,37 +32,56 @@ body{
     max-width:1400px;
     margin:auto;
 
-    padding:20px 50px;
+    padding:60px 50px;
 
     background:#fbf4e6;
-
-    border:18px solid #b38b4d;
-    border-radius:30px;
-
 
     box-shadow:
         0 0 40px rgba(0,0,0,0.2),
         inset 0 0 25px rgba(179,139,77,0.25);
 }
 
-.marco-orla::before,
-.marco-orla::after{
-    content:"";
+/* =========================
+   ESQUINAS CENEFA
+========================= */
 
+.corner{
     position:absolute;
+    width:180px;
+    height:180px;
 
-    font-size:50px;
-    color:rgba(179,139,77,0.35);
+    background:url("fotos/cenefa4.png") no-repeat center;
+    background-size:contain;
+
+    pointer-events:none;
+    opacity:0.95;
 }
 
-.marco-orla::before{
-    top:15px;
-    left:25px;
+/* superior izquierda */
+.corner.tl{
+    top:-10px;
+    left:-10px;
 }
 
-.marco-orla::after{
-    bottom:15px;
-    right:25px;
+/* superior derecha */
+.corner.tr{
+    top:-10px;
+    right:-10px;
+    transform: scaleX(-1);
+}
+
+/* inferior izquierda */
+.corner.bl{
+    bottom:-10px;
+    left:-10px;
+    transform: scaleY(-1);
+}
+
+/* inferior derecha */
+.corner.br{
+    bottom:-10px;
+    right:-10px;
+    transform: scale(-1, -1);
 }
 
 /* =========================
@@ -95,39 +114,18 @@ body{
 }
 
 /* =========================
-   ZONA SUPERIOR
-========================= */
-
-.decor-top{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    gap:50px;
-    margin-bottom:10px;
-}
-
-/* escudo */
-
-.escudo img{
-    width:100px;
-
-    filter:drop-shadow(0 8px 12px rgba(0,0,0,0.25));
-}
-
-/* =========================
    TITULO
 ========================= */
 
 .titulo{
     text-align:center;
-    margin:20px 0 50px;
+    margin:5px 0 20px;
 }
 
-.titulo h1{
+.titulo h2{
     margin:0;
 
-    font-size:clamp(14px, 4vw, 28px);
+    font-size:clamp(18px, 4vw, 34px);
 
     letter-spacing:3px;
     color:#6f4a1f;
@@ -138,7 +136,7 @@ body{
 .titulo p{
     margin-top:8px;
 
-    font-size:clamp(12px, 2.5vw, 20px);
+    font-size:clamp(16px, 2.5vw, 25px);
 
     font-style:italic;
     color:#8a6a4a;
@@ -152,26 +150,15 @@ body{
     display:block;
     margin:5px auto;
 
-    width:min(450px, 80%);
-    height:auto;
+    width:min(250px, 80%);
+    height:25px;
 
-    opacity:.95;
-}
+    opacity:.99;
 
-@media (max-width:768px){
-
-    .cenefa-titulo{
-        width:min(320px, 85%);
-    }
-}
-
-.cenefa-titulo{
-    filter:
-        sepia(100%)
-        saturate(200%)
-        hue-rotate(5deg);
-
-    opacity:.85;
+/*    filter:
+/*        sepia(100%)*/
+/*        saturate(200%)*/
+/*        hue-rotate(5deg);*/
 }
 
 /* =========================
@@ -191,58 +178,43 @@ body{
     text-align:center;
 }
 
-
 /* =========================
-   FOTOS RESPONSIVE
+   FOTOS
 ========================= */
 
 .foto-wrapper{
     position:relative;
-
     width:100%;
-	/* max-width:210px */
     max-width:150px;
-
     aspect-ratio:3/4;
-
     margin:auto;
 }
-
-/* FOTO PRINCIPAL */
 
 .foto-principal{
     width:100%;
     height:100%;
-
     object-fit:cover;
 
     border-radius:50% / 38%;
     border:clamp(2px, 0.5vw, 5px) solid #d9bf8f;
 
     box-shadow:0 8px 18px rgba(0,0,0,0.18);
-
     cursor:pointer;
 }
 
-/* FOTO SECUNDARIA */
-
 .foto-secundaria{
     position:absolute;
-
     bottom:-4%;
     right:-20%;
 
     width:40%;
-
     aspect-ratio:3/4;
 
     border-radius:50%;
     object-fit:cover;
 
     border:clamp(1px, 0.25vw, 3px) solid white;
-
     box-shadow:0 5px 14px rgba(0,0,0,0.28);
-
     cursor:pointer;
 }
 
@@ -252,17 +224,14 @@ body{
 
 .nombre{
     margin-top:15px;
-
     font-size:11px;
     font-weight:bold;
-
     color:#5f3d1c;
 }
 
 .residencia{
     font-size:11px;
     font-style:italic;
-
     color:#86684a;
 }
 
@@ -272,94 +241,44 @@ body{
 
 .popup{
     display:none;
-
     position:fixed;
     inset:0;
-
     background:rgba(0,0,0,0.82);
-
     justify-content:center;
     align-items:center;
-
     z-index:9999;
 }
 
 .popup img{
     max-width:85%;
     max-height:85vh;
-
     border-radius:20px;
     border:8px solid white;
-
     box-shadow:0 0 35px rgba(0,0,0,0.45);
-
     cursor:pointer;
 }
 
 /* =========================
-   RESPONSIVE TABLET/MÓVIL
+   RESPONSIVE
 ========================= */
 
 @media (max-width:768px){
-
-    body{
-        padding:15px;
-    }
+    body{ padding:15px; }
 
     .marco-orla{
-        padding:35px 15px;
-        border-width:10px;
+        padding:50px 20px;
     }
 
-    .decor-top{
-        gap:10px;
-    }
-
-    .escudo img{
-        width:70px;
-    }
-
-    .nombre{
-        font-size:13px;
-    }
-
-    .residencia{
-        font-size:11px;
-    }
-
-    .fila{
-        gap:18px;
-    }
-
-    .foto-wrapper{
-        width:min(28vw, 130px);
+    .corner{
+        width:130px;
+        height:130px;
     }
 }
 
-/* =========================
-   MÓVILES PEQUEÑOS
-========================= */
-
 @media (max-width:480px){
-
-    .foto-wrapper{
-        width:min(32vw, 100px);
-    }
-
-    .alumno{
-        min-width:90px;
-    }
-
-    .nombre{
-        font-size:12px;
-    }
-
-    .residencia{
-        font-size:10px;
-    }
-
-    .titulo{
-        margin:25px 0 40px;
+    .corner{
+        width:100px;
+        height:100px;
     }
 }
 
@@ -370,70 +289,56 @@ body{
 
 <div class="marco-orla">
 
+    <!-- ESQUINAS CENEFA -->
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
     <div class="titulo">
 
-    <img
-        src="fotos/cenefa.png"
-        class="cenefa-titulo"
-        alt="Cenefa decorativa">
+        <img src="fotos/cenefa5.png" class="cenefa-titulo" alt="Cenefa">
 
-    <h1>Colegio Sagrado Corazón (Cáceres)</h1>
+        <h1>Colegio Sagrado Corazón (Cáceres)</h1>
 
-    <p>
-        51 Aniversario Bachillerato (1975-2026)
-    </p>
+        <p>51 Aniversario Bachillerato (1975-2026)</p>
 
-    <img
-        src="fotos/cenefa.png"
-        class="cenefa-titulo"
-        alt="Cenefa decorativa">
+        <img src="fotos/cenefa6.png" class="cenefa-titulo" alt="Cenefa">
 
-</div>
-<div class="toolbar">
-        <button id="toggleFotos">
-            Intercambiar fotos
-        </button>
     </div>
+
+    <div class="toolbar">
+        <button id="toggleFotos">Intercambiar fotos</button>
+    </div>
+
     <div id="orla"></div>
 
 </div>
 
 <!-- POPUP -->
-
 <div class="popup" id="popup">
     <img id="imagenPopup">
 </div>
 
 <script>
 
-/* =========================
-   DATOS
-========================= */
-
 const data = [
-   	  {
+{
     "nombre": "Pilar González-Quijano Díaz",
     "residencia": "Cáceres",
     "foto_bn": "fotos/Pilar_bn.png",
     "foto_color": "fotos/Pilar_color.png"
-  }
-  
+}
 ];
-
-/* =========================
-   GENERAR ORLA
-========================= */
 
 const contenedor = document.getElementById("orla");
 
 data.forEach(alumno => {
 
     const div = document.createElement("div");
-
     div.className = "alumno";
 
     div.innerHTML = `
-
     <div class="foto-wrapper">
 
         <img class="foto-principal abrir"
@@ -448,75 +353,49 @@ data.forEach(alumno => {
 
     </div>
 
-    <div class="nombre">
-        ${alumno.nombre}
-    </div>
-
-    <div class="residencia">
-        ${alumno.residencia}
-    </div>
-
+    <div class="nombre">${alumno.nombre}</div>
+    <div class="residencia">${alumno.residencia}</div>
     `;
 
     contenedor.appendChild(div);
-
 });
 
-/* =========================
-   POPUP
-========================= */
-
+/* POPUP */
 const popup = document.getElementById("popup");
 const imagenPopup = document.getElementById("imagenPopup");
 
 document.addEventListener("click",(e)=>{
 
     if(e.target.classList.contains("abrir")){
-
         imagenPopup.src = e.target.src;
         popup.style.display = "flex";
     }
 
     if(e.target.id === "popup"){
-
         popup.style.display = "none";
     }
-
 });
 
-/* =========================
-   INTERCAMBIO REAL
-========================= */
-
+/* INTERCAMBIO */
 let estadoBN = true;
 
-document.getElementById("toggleFotos")
-.addEventListener("click", () => {
+document.getElementById("toggleFotos").addEventListener("click", () => {
 
     estadoBN = !estadoBN;
 
-    document.querySelectorAll(".foto-wrapper")
-    .forEach(wrapper => {
+    document.querySelectorAll(".foto-wrapper").forEach(wrapper => {
 
-        const principal =
-            wrapper.querySelector(".foto-principal");
-
-        const secundaria =
-            wrapper.querySelector(".foto-secundaria");
+        const principal = wrapper.querySelector(".foto-principal");
+        const secundaria = wrapper.querySelector(".foto-secundaria");
 
         if(estadoBN){
-
             principal.src = principal.dataset.bn;
             secundaria.src = secundaria.dataset.color;
-
         } else {
-
             principal.src = principal.dataset.color;
             secundaria.src = secundaria.dataset.bn;
         }
-
     });
-
 });
 
 </script>
