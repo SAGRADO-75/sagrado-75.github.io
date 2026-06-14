@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gramola Retro</title>
+  <style>
+    body {
+  font-size: 12px;
+  background: #FFFFFF;
+  color: white;
+  font-family: 'Courier New', monospace;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;   /* mejor que solo margin */
+  margin: 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.gramola {
+  background: #e74c3c;
+  border: 5px solid #c0392b;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+
+  width: 100%;
+  max-width: 340px;    /* máximo 340px */
+  box-sizing: border-box;
+
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+    .gramola h2 {
+      margin-top: 0;
+    }
+
+    .controls {
+      margin: 15px 0;
+    }
+
+    .controls button {
+      font-size: 12px;
+	  background: #ecf0f1;
+      border: none;
+      padding: 10px 15px;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .controls button:hover {
+      background: #bdc3c7;
+    }
+
+    audio {
+      width: 70%;
+      margin-top: 10px;
+    }
+
+    .playlist {
+      font-size: 12px;
+	  max-height: 70px;
+      overflow-y: auto;
+      margin-top: 15px;
+      background: #ecf0f1;
+      color: #2c3e50;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .playlist-item {
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .playlist-item:hover {
+      background-color: #dcdcdc;
+    }
+
+    .playlist-item.active {
+      background-color: #3498db;
+      color: white;
+      font-weight: bold;
+    }
+	
+	.track-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 25%;
+  margin: 2px auto;
+  display: none; /* oculto por defecto */
+  border: 2px solid white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+@media (max-width: 480px) {
+  .gramola {
+    max-width: 95%;
+  }
+
+  .controls button {
+    margin: 3px;
+    padding: 8px 10px;
+  }
+
+  .track-image {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="gramola">
+    <h2>🎶 Musical Sagrado Corazón</h2>
+	<h3>51 Aniversario Bachillerato 1975-2026</h3>
+	<img id="trackImage" class="track-image" src="" alt="" />
+    <audio id="audio" controls></audio>
+    <div class="controls">
+      <button onclick="prevTrack()">⏮️ Anterior</button>
+      <button onclick="nextTrack()">⏭️ Siguiente</button>
+    </div>
+    <div class="playlist" id="playlist"></div>
+  </div>
+
+  <script>
+    const playlist = [
+   
+	  {
+        name: "Aute - Al alba (Pilar González_Quijano Díaz)",
+        url: "audios/aute_al_alba.mp3",
+		img: "fotos/Pilar_bn.png"
+      },
+	    {
+        name: "Camilo Sexto - Algo de mí (Isabel Moretón García)",
+        url: "audios/Camilo_Sesto_Algo_de_mi.mp3",
+		img: "fotos/Isabel_Moreton_Garcia_bn.png"
+      },
+	    {
+        name: "Georges Moustaki - Le Métèque (María José Rodilla León)",
+        url: "audios/Georges_Moustaki_Le_Meteque.mp3",
+		img: "fotos/Maria_Jose_Rodilla_Leon_bn.png"
+      },
+	    {
+        name: "The Rolling Stones -Sa tisfaction.mp3 (Fátima Torres Asensio)",
+        url: "audios/Rolling_Satisfaction.mp3",
+		img: "fotos/Fatima_Torres_Asensio_bn.png"
+      }
+    ];
+
+    let currentTrack = 0;
+    const audio = document.getElementById('audio');
+    const playlistDiv = document.getElementById('playlist');
+const trackImage = document.getElementById('trackImage');
+
+    function loadTrack(index) {
+  currentTrack = index;
+  const track = playlist[index];
+
+  audio.src = track.url;
+  audio.play();
+
+  // 🔥 Imagen de la persona
+  if (track.img) {
+    trackImage.src = track.img;
+    trackImage.style.display = "block";
+  } else {
+    trackImage.style.display = "none";
+  }
+
+  updatePlaylistDisplay();
+  scrollToCurrentTrack();
+}
+
+    function nextTrack() {
+      currentTrack = (currentTrack + 1) % playlist.length;
+      loadTrack(currentTrack);
+    }
+
+    function prevTrack() {
+      currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+      loadTrack(currentTrack);
+    }
+
+    function updatePlaylistDisplay() {
+      playlistDiv.innerHTML = "";
+      playlist.forEach((track, index) => {
+        const item = document.createElement("div");
+        item.className = "playlist-item" + (index === currentTrack ? " active" : "");
+        item.textContent = track.name;
+        item.onclick = () => loadTrack(index);
+        playlistDiv.appendChild(item);
+      });
+    }
+
+    function scrollToCurrentTrack() {
+      const activeItem = document.querySelector(".playlist-item.active");
+      if (activeItem) {
+        activeItem.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
+    audio.addEventListener('ended', nextTrack);
+    updatePlaylistDisplay();
+    loadTrack(currentTrack);
+  </script>
+</body>
+</html>
