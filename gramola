@@ -1,1 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gramola Retro</title>
+  <style>
+    body {
+      font-size: 12px;
+	background: #FFFFFF;
+      color: white;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 20px;
+    }
 
+    .gramola {
+      background: #e74c3c;
+      border: 5px solid #c0392b;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      width: 340px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .gramola h2 {
+      margin-top: 0;
+    }
+
+    .controls {
+      margin: 15px 0;
+    }
+
+    .controls button {
+      font-size: 12px;
+	  background: #ecf0f1;
+      border: none;
+      padding: 10px 15px;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .controls button:hover {
+      background: #bdc3c7;
+    }
+
+    audio {
+      width: 70%;
+      margin-top: 10px;
+    }
+
+    .playlist {
+      font-size: 12px;
+	  max-height: 70px;
+      overflow-y: auto;
+      margin-top: 15px;
+      background: #ecf0f1;
+      color: #2c3e50;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .playlist-item {
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .playlist-item:hover {
+      background-color: #dcdcdc;
+    }
+
+    .playlist-item.active {
+      background-color: #3498db;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="gramola">
+    <h2>🎶 Musical COU 75</h2>
+    <audio id="audio" controls></audio>
+    <div class="controls">
+      <button onclick="prevTrack()">⏮️ Anterior</button>
+      <button onclick="nextTrack()">⏭️ Siguiente</button>
+    </div>
+    <div class="playlist" id="playlist"></div>
+  </div>
+
+  <script>
+    const playlist = [
+   {
+        name: "LaBelle - Lady Marmalade (La primera. Por aclamación)",
+        url: "LaBelle - Lady Marmalade.mp3"
+      },
+	     {
+        name: "Los Mustang - Los jóvenes (Luisa Fernanda Alía)",
+        url: "https://cou-75.github.io/Los Mustang - Los jóvenes.mp3"
+      },
+	    {
+        name: "Aute - Al alba -canta Rosa León- (Tomás Barroso)",
+        url: "https://cou-75.github.io/Rosa León - Al alba.mp3"
+      },
+	    {
+        name: "Joan Manuel Serrat - Barquito de Papel (Fátima Barroso)",
+        url: "https://cou-75.github.io/Joan Manuel Serrat - Barquito de Papel.mp3"
+      },
+	    {
+        name: "The Rolling Stones - (I Can't Get No) Satisfaction (Pilar Barroso)",
+        url: "https://cou-75.github.io/The Rolling Stones - (I Can't Get No) Satisfaction.mp3"
+      },
+	    {
+        name: "Camilo Sexto - Algo de mí (Alfonso Callejo)",
+        url: "https://cou-75.github.io/Camilo Sesto - Algo de Mí.mp3"
+      },
+	    {
+        name: "ABBA - Waterloo (Soledad García)",
+        url: "https://cou-75.github.io/ABBA - Waterloo.mp3"
+      },
+	    {
+        name: "Barry White - Love's Theme (Germán González)",
+        url: "https://cou-75.github.io/Barry White - Love's Theme.mp3"
+      },
+	    {
+        name: "Cecilia - Un Ramito de Violetas (Pili Guerrero)",
+        url: "https://cou-75.github.io/Cecilia - Un Ramito de Violetas.mp3"
+      },
+      {
+        name: "Bruce Springsteen - Thunder Road (Quico León)",
+        url: "https://cou-75.github.io/Bruce Springsteen - Thunder Road.mp3"
+      },
+	    {
+        name: "The Mamas & The Papas - California Dreamin (José Luis Madrigal)",
+        url: "https://cou-75.github.io/The Mamas & The Papas - California Dreamin.mp3"
+      },
+	    {
+        name: "Gilbert O'Sullivan - Alone Again (Eufemia Muñoz)",
+        url: "https://cou-75.github.io/Gilbert O'Sullivan - Alone Again.mp3"
+      },
+	    {
+        name: "John Lennon - Imagine (Puri Muriel)",
+        url: "https://cou-75.github.io/John Lennon - Imagine.mp3"
+      },
+      {
+        name: "Joe Dassin - Et si tu n'existais pas (Pilar Ortega)",
+        url: "https://cou-75.github.io/Joe Dassin - Et si tu n'existais pas.mp3"
+      },
+      {
+        name: "Van Morrison, John Lee Hooker - Gloria (Elías Palomares)",
+        url: "https://cou-75.github.io/Gloria - Van Morrison, John Lee Hooker.mp3"
+      },
+    {
+        name: "Leonard Cohen - Suzanne (Chufi Pañero)",
+        url: "https://cou-75.github.io/Leonard Cohen - Suzanne.mp3"
+      },
+	 {
+        name: "David Bowie - Rebel Rebel (María Isabel Pérez)",
+        url: "https://cou-75.github.io/David Bowie - Rebel Rebel.mp3"
+      },
+   {
+        name: "Frank Sinatra - A mi manera (Carlos García Villalón)",
+        url: "https://cou-75.github.io/Frank Sinatra - A mi manera.mp3"
+      },
+	    {
+        name: "Simon & Garfunkel The Boxer (Toya Pérez Aloe)",
+        url: "https://cou-75.github.io/Simon & Garfunkel The Boxer.mp3"
+      },
+	    {
+        name: "Bruce Springsteen - Dancing In the Dark (Gabriel Candela)",
+        url: "https://cou-75.github.io/Bruce Springsteen - Dancing In the Dark.mp3"
+      },
+	    {
+        name: "Albert Hammond - It Never Rains in Southern California (Carmen Fernández)",
+        url: "https://cou-75.github.io/Albert Hammond - It Never Rains in Southern California.mp3"
+      },
+      {
+        name: "Nino Bravo - Un Beso Y Una Flor (Mercedes Floriano)",
+        url: "https://cou-75.github.io/Nino Bravo - Un Beso Y Una Flor.mp3"
+      },
+      {
+        name: "Bob Dylan - Knockin' On Heaven's Door (Marta García)",
+        url: "https://cou-75.github.io/Bob Dylan - Knockin' On Heaven's Door.mp3"
+      },
+    {
+        name: "Albert Hammond - Échame a mí la culpa (Elvira Gómez)",
+        url: "https://cou-75.github.io/Albert Hammond - Échame a mí la culpa.mp3"
+      },
+	    {
+        name: "Pedro Ruy Blas - A los que hirió el amor (Quini Municio)",
+        url: "https://cou-75.github.io/Pedro Ruy Blas - A los que hirió el amor.mp3"
+      },
+	    {
+        name: "The Beatles - Yesterday (Inés Sáez)",
+        url: "https://cou-75.github.io/The Beatles - Yesterday.mp3"
+      },	
+  {
+        name: "MFSB - T.S.O.P. The Sound of Philadelphia (Jesús Nevado)",
+        url: "https://cou-75.github.io/MFSB - T.S.O.P. (The Sound of Philadelphia).mp3"
+      },
+	    {
+        name: "Cat Stevens - Moonshadow (Martín Valverde -Chino-)",
+        url: "https://cou-75.github.io/Cat Stevens - Moonshadow.mp3"
+      },
+	 {
+        name: "Mari Trini- Una estrella en mi jardín (Nena García)",
+        url: "https://cou-75.github.io/Mari Trini- Una estrella en mi jardín.mp3"
+      },
+		     {
+        name: "Mercedes Sosa - Gracias a la vida (Pelayo Mellado)",
+        url: "https://cou-75.github.io/Mercedes Sosa - Gracias A La Vida.mp3"
+      },
+	     {
+        name: "Engelbert Humperdinck - Please Release Me -Let Me Go- (Rosa Rodríguez)",
+        url: "https://cou-75.github.io/Engelbert Humperdinck - Please Release Me (Let Me Go).mp3"
+      },
+	  {
+        name: "Camilo Sesto - Jamás (Enrique Fernández Cañadas)",
+        url: "https://cou-75.github.io/Camilo Sesto - Jamás.mp3"
+      },
+		       {
+        name: "Triana - El lago (Jesús Hernández Terrón)",
+        url: "https://cou-75.github.io/Triana - El lago.mp3"
+      },
+	  {
+        name: "Georges Moustaki - Le Métèque (Herminia Hernández Pelayo)",
+        url: "https://cou-75.github.io/Georges Moustaki - Le Métèque.mp3"
+      },
+		 {
+        name: "Mercedes Sosa - Alfonsina y el mar (Sebastián Gómez Rivera)",
+        url: "https://cou-75.github.io/Mercedes Sosa - Alfonsina y el mar en directo.mp3"
+      },
+		{
+        name: "Janis Joplin - Cry Baby (Francisco Corrales Corrales)",
+        url: "https://cou-75.github.io/Janis Joplin - Cry Baby.mp3"
+      },
+		{
+        name: "Emilio José - Soledad (Sole Pulido Iglesias)",
+        url: "https://cou-75.github.io/Emilio José - Soledad.mp3"
+      },
+		{
+        name: "Lobo - I'd Love You to Want Me (Fidela Calvarro Acosta)",
+        url: "https://cou-75.github.io/Lobo - I'd Love You to Want Me.mp3"
+      },
+		{
+        name: "Pablo Milanés - Yo no te pido (José Luis Silos Muñoz)",
+        url: "https://cou-75.github.io/Pablo Milanés - Yo no te pido.mp3"
+      },
+		{
+        name: "The Beatles - Let It Be (Magdalena Márquez Fragoso)",
+        url: "https://cou-75.github.io/The Beatles - Let It Be.mp3"
+      },
+		{
+        name: "Santana - Europa (Francisco Hernández Mogollón)",
+        url: "https://cou-75.github.io/Santana - Europa.mp3"
+      },
+	  {
+        name: "Y como cierre: Inma Cuesta - Una de esas noches sin final (Pelayo Mellado)",
+        url: "https://cou-75.github.io/Inma Cuesta - Una de esas noches sin final.mp3"
+      }
+    ];
+
+    let currentTrack = 0;
+    const audio = document.getElementById('audio');
+    const playlistDiv = document.getElementById('playlist');
+
+    function loadTrack(index) {
+      currentTrack = index;
+      const track = playlist[index];
+      audio.src = track.url;
+      audio.play();
+      updatePlaylistDisplay();
+      scrollToCurrentTrack();
+    }
+
+    function nextTrack() {
+      currentTrack = (currentTrack + 1) % playlist.length;
+      loadTrack(currentTrack);
+    }
+
+    function prevTrack() {
+      currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+      loadTrack(currentTrack);
+    }
+
+    function updatePlaylistDisplay() {
+      playlistDiv.innerHTML = "";
+      playlist.forEach((track, index) => {
+        const item = document.createElement("div");
+        item.className = "playlist-item" + (index === currentTrack ? " active" : "");
+        item.textContent = track.name;
+        item.onclick = () => loadTrack(index);
+        playlistDiv.appendChild(item);
+      });
+    }
+
+    function scrollToCurrentTrack() {
+      const activeItem = document.querySelector(".playlist-item.active");
+      if (activeItem) {
+        activeItem.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
+    audio.addEventListener('ended', nextTrack);
+    updatePlaylistDisplay();
+    loadTrack(currentTrack);
+  </script>
+</body>
+</html>
