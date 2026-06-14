@@ -83,12 +83,25 @@
       color: white;
       font-weight: bold;
     }
+	
+	.track-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 25%;
+  margin: 2px auto;
+  display: none; /* oculto por defecto */
+  border: 2px solid white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
   </style>
 </head>
 <body>
   <div class="gramola">
     <h2>🎶 Musical Sagrado Corazón</h2>
-	<h3>🎶 51 Aniversario Bachillerato 1976-2026</h3>  
+	<h3>51 Aniversario Bachillerato 1975-2026</h2>
+	<img id="trackImage" class="track-image" src="" alt="" />
     <audio id="audio" controls></audio>
     <div class="controls">
       <button onclick="prevTrack()">⏮️ Anterior</button>
@@ -99,28 +112,52 @@
 
   <script>
     const playlist = [
-   {
-        name: "LaBelle - Lady Marmalade (La primera. Por aclamación)",
-        url: "LaBelle - Lady Marmalade.mp3"
-      },
-   {
+   
+	  {
         name: "Aute - Al alba (Pilar González_Quijano Díaz)",
-        url: "aute_al_alba.mp3"
+        url: "audios/aute_al_alba.mp3",
+		img: "fotos/pilar_bn.png"
+      },
+	    {
+        name: "Camilo Sexto - Algo de mí (Isabel Moretón García)",
+        url: "audios/Camilo_Sesto_Algo_de_mi.mp3",
+		img: "fotos/Isabel_Moreton_Garcia_bn.png"
+      },
+	    {
+        name: "Georges Moustaki - Le Métèque (María José Rodilla León)",
+        url: "audios/Georges_Moustaki_Le_Meteque.mp3",
+		img: "fotos/Maria_Jose_Rodilla_Leon_bn.png"
+      },
+	    {
+        name: "The Rolling Stones -Sa tisfaction.mp3 (Fátima Torres Asensio)",
+        url: "audios/Rolling_Satisfaction.mp3",
+		img: "fotos/Fatima_Torres_Asensio_bn.png"
       }
     ];
 
     let currentTrack = 0;
     const audio = document.getElementById('audio');
     const playlistDiv = document.getElementById('playlist');
+const trackImage = document.getElementById('trackImage');
 
     function loadTrack(index) {
-      currentTrack = index;
-      const track = playlist[index];
-      audio.src = track.url;
-      audio.play();
-      updatePlaylistDisplay();
-      scrollToCurrentTrack();
-    }
+  currentTrack = index;
+  const track = playlist[index];
+
+  audio.src = track.url;
+  audio.play();
+
+  // 🔥 Imagen de la persona
+  if (track.img) {
+    trackImage.src = track.img;
+    trackImage.style.display = "block";
+  } else {
+    trackImage.style.display = "none";
+  }
+
+  updatePlaylistDisplay();
+  scrollToCurrentTrack();
+}
 
     function nextTrack() {
       currentTrack = (currentTrack + 1) % playlist.length;
