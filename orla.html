@@ -154,12 +154,11 @@ body{
     height:25px;
 
     opacity:.99;
-/*
-    filter:
-        sepia(100%)
-        saturate(200%)
-        hue-rotate(5deg);
-*/
+
+/*    filter:
+/*        sepia(100%)*/
+/*        saturate(200%)*/
+/*        hue-rotate(5deg);*/
 }
 
 /* =========================
@@ -259,38 +258,6 @@ body{
     cursor:pointer;
 }
 
-.popup-contenido{
-    text-align:center;
-}
-
-#tituloCancionPopup{
-    margin-top:15px;
-    color:white;
-    font-size:14px;
-    font-weight:bold;
-    text-shadow:0 2px 8px rgba(0,0,0,.7);
-}
-#controlesAudio{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-#controlesAudio button{
-    padding:8px 14px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:bold;
-    background:#FBF4E6;
-    color:black;
-}
-
-#controlesAudio button:hover{
-    background:#8b6a2e;
-}
 /* =========================
    RESPONSIVE
 ========================= */
@@ -312,13 +279,6 @@ body{
     .corner{
         width:100px;
         height:100px;
-    }
-}
-
-@media print {
-    * {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
     }
 }
 
@@ -357,21 +317,8 @@ body{
 
 <!-- POPUP -->
 <div class="popup" id="popup">
-    <div class="popup-contenido">
-        <img id="imagenPopup">
-
-        <div id="tituloCancionPopup"></div>
-
-        <div id="controlesAudio" style="margin-top:10px; display:none;">
-            <button id="btnPlay">▶ Reproducir</button>
-            <button id="btnPause">⏸ Pausar</button>
-            <button id="btnRestart">⏹ Reiniciar</button>
-        </div>
-
-    </div>
+    <img id="imagenPopup">
 </div>
-
-<audio id="audioPopup" preload="auto"></audio>
 
 <script>
 
@@ -434,9 +381,7 @@ const data = [
     "nombre": "Pilar González-Quijano Díaz",
     "residencia": "Cáceres",
     "foto_bn": "fotos/Pilar_bn.png",
-    "foto_color": "fotos/Pilar_color.png",
-	"audio": "audios/Aute-Al-Alba.mp3",
-	"tituloCancion": "Al Alba - Luis Eduardo Aute"
+    "foto_color": "fotos/Pilar_color.png"
 },
    {
     "nombre": "Carmen Guisado Macías",
@@ -479,7 +424,7 @@ const data = [
     "residencia": "Cáceres",
     "foto_bn": "fotos/Toya_Piñero_Mariño_bn.png",
     "foto_color": "fotos/Toya_Piñero_Mariño_color.png"
-},   
+},  
 {
     "nombre": "María José Rodilla León",
     "residencia": "Ciudad de México",
@@ -551,77 +496,17 @@ data.forEach(alumno => {
 /* POPUP */
 const popup = document.getElementById("popup");
 const imagenPopup = document.getElementById("imagenPopup");
-const audioPopup = document.getElementById("audioPopup");
-const tituloCancionPopup =
-    document.getElementById("tituloCancionPopup");
 
-const controlesAudio =
-    document.getElementById("controlesAudio");
+document.addEventListener("click",(e)=>{
 
-const btnPlay =
-    document.getElementById("btnPlay");
-
-const btnPause =
-    document.getElementById("btnPause");
-
-const btnRestart =
-    document.getElementById("btnRestart");
-	
-document.addEventListener("click", (e) => {
-
-    if (e.target.classList.contains("abrir")) {
-
-        // 1. Abrir popup SIEMPRE (aunque el audio falle)
+    if(e.target.classList.contains("abrir")){
         imagenPopup.src = e.target.src;
         popup.style.display = "flex";
-
-        // 2. Buscar alumno de forma segura
-       const bnSrc = e.target.dataset.bn;
-
-		const alumno = data.find(a =>
-		a.foto_bn === bnSrc
-		);
-
-tituloCancionPopup.textContent =
-    alumno?.tituloCancion || "";
-
-        // 3. Si no hay alumno o no tiene audio → salir sin romper nada
-        if (!alumno || !alumno.audio) {
-    controlesAudio.style.display = "none";
-    return;
-}
-
-controlesAudio.style.display = "flex";
-
-        // 4. Validar audio antes de reproducir
-        try {
-            audioPopup.pause();              // corta cualquier audio anterior
-            audioPopup.currentTime = 0;
-            audioPopup.src = alumno.audio;
-
-            const playPromise = audioPopup.play();
-
-            // 5. Manejo moderno de autoplay (MUY importante)
-            if (playPromise !== undefined) {
-                playPromise.catch(err => {
-                    console.warn("Audio bloqueado o no disponible:", err);
-                });
-            }
-
-        } catch (err) {
-            console.warn("Error al reproducir audio:", err);
-        }
     }
 
-    // cerrar popup
-    if (e.target.id === "popup") {
-    popup.style.display = "none";
-    tituloCancionPopup.textContent = "";
-    controlesAudio.style.display = "none";
-
-    audioPopup.pause();
-    audioPopup.currentTime = 0;
-}
+    if(e.target.id === "popup"){
+        popup.style.display = "none";
+    }
 });
 
 /* INTERCAMBIO */
@@ -646,21 +531,7 @@ document.getElementById("toggleFotos").addEventListener("click", () => {
     });
 });
 
-btnPlay.addEventListener("click", () => {
-    audioPopup.play();
-});
-
-btnPause.addEventListener("click", () => {
-    audioPopup.pause();
-});
-
-btnRestart.addEventListener("click", () => {
-    audioPopup.currentTime = 0;
-    audioPopup.play();
-});
-
 </script>
-
 
 </body>
 </html>
