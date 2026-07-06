@@ -91,7 +91,27 @@ body{
 .toolbar{
     display:flex;
     justify-content:center;
+    align-items:center;
+    gap:12px;
     margin-bottom:20px;
+}
+
+.boton-aniversario{
+    display:inline-block;
+    padding:10px 18px;
+    font-size:14px;
+    background:#b38b4d;
+    color:white;
+    text-decoration:none;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    box-shadow:0 6px 14px rgba(0,0,0,0.2);
+    transition:background .2s;
+}
+
+.boton-aniversario:hover{
+    background:#8b6a2e;
 }
 
 #toggleFotos{
@@ -308,8 +328,15 @@ body{
     </div>
 
     <div class="toolbar">
-        <button id="toggleFotos">Intercambiar fotos</button>
-    </div>
+    <button id="toggleFotos">Intercambiar fotos</button>
+
+    <a href="https://bit.ly/sagrado51"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="boton-aniversario">
+        Encuentros: 2000 / 2026
+    </a>
+</div>
 
     <div id="orla"></div>
 
@@ -352,7 +379,7 @@ const data = [
     "residencia": "Arroyo de la Luz",
     "foto_bn": "fotos/Carmen_Collado_Bravo_bn.png",
     "foto_color": "fotos/Carmen_Collado_Bravo_color.png"
-},   
+},
 {
     "nombre": "Carmen de Arcos Fernández",
     "residencia": "Cáceres",
@@ -364,7 +391,7 @@ const data = [
     "residencia": "Cáceres",
     "foto_bn": "fotos/MLuisa_Diaz_Granado_bn.png",
     "foto_color": "fotos/MLuisa_Diaz_Granado_color.png"
-},   
+},
 {
     "nombre": "Pilar Durán Galán",
     "residencia": "Cáceres",
@@ -388,7 +415,7 @@ const data = [
     "residencia": "Madrid",
     "foto_bn": "fotos/Gabriela_Fernandez_Espina_Avila_bn.png",
     "foto_color": "fotos/Gabriela_Fernandez_Espina_Avila_color.png"
-},   
+},
    {
     "nombre": "Julia Flores García",
     "residencia": "Huelva",
@@ -400,8 +427,8 @@ const data = [
     "residencia": "Cáceres",
     "foto_bn": "fotos/Encarna_Fragoso_Lucas_bn.png",
     "foto_color": "fotos/Encarna_Fragoso_Lucas_color.png"
-},   
-{
+},
+   {
     "nombre": "Altagracia Gil Gutiérrez",
     "residencia": "Sevilla",
     "foto_bn": "fotos/Altagracia_Gil_Gutierrez_bn.png",
@@ -412,7 +439,7 @@ const data = [
     "residencia": "Cáceres",
     "foto_bn": "fotos/MVictoria_Gil_Rodriguez_bn.png",
     "foto_color": "fotos/MVictoria_Gil_Rodriguez_color.png"
-},  
+},
    {
     "nombre": "María Luisa González Jiménez",
     "residencia": "Cáceres",
@@ -424,7 +451,7 @@ const data = [
     "residencia": "Miajadas",
     "foto_bn": "fotos/Inmaculada_Gonzalez_Moriano_bn.png",
     "foto_color": "fotos/Inmaculada_Gonzalez_Moriano_color.png"
-},   
+},
 {
     "nombre": "Pilar González-Quijano Díaz",
     "residencia": "Cáceres",
@@ -437,7 +464,7 @@ const data = [
     "foto_bn": "fotos/Carmen_Guisado_bn.png",
     "foto_color": "fotos/Carmen_Guisado_color.png"
 },
-   {
+{
     "nombre": "María Jesús Irala García",
     "residencia": "Plasencia",
     "foto_bn": "fotos/MJesus_Irala_Garcia_bn.png",
@@ -449,18 +476,18 @@ const data = [
     "foto_bn": "fotos/Isabel_Lanzas_Merino_bn.png",
     "foto_color": "fotos/Isabel_Lanzas_Merino_color.png"
 },
-   {
+{
     "nombre": "Consolación Martín Orozco",
     "residencia": "Navalmoral de la Mata",
     "foto_bn": "fotos/Consolacion_Martin_Orozco_bn.png",
     "foto_color": "fotos/Consolacion_Martin_Orozco_color.png"
 },
-  {
+{
     "nombre": "Maribel Moreno Sánchez",
     "residencia": "Santa Cruz de Tenerife",
     "foto_bn": "fotos/Maribel_Moreno_Sanchez_bn.png",
     "foto_color": "fotos/Maribel_Moreno_Sanchez_color.png"
-}, 
+},
 {
     "nombre": "Isabel Moretón García",
     "residencia": "Cáceres",
@@ -484,7 +511,7 @@ const data = [
     "residencia": "Cáceres",
     "foto_bn": "fotos/Milagrosa_Perez_Caro_bn.png",
     "foto_color": "fotos/Milagrosa_Perez_Caro_color.png"
-},   
+},
 {
     "nombre": "Elena Pérez Corchero",
     "residencia": "Cáceres",
@@ -515,12 +542,12 @@ const data = [
     "foto_bn": "fotos/Charo_Ramiro_Bazaga_bn.png",
     "foto_color": "fotos/Charo_Ramiro_Bazaga_color.png"
 },
-   {
+ {
     "nombre": "Visi Ramiro García",
     "residencia": "Cáceres",
     "foto_bn": "fotos/Visi_Ramiro_Garcia_bn.png",
     "foto_color": "fotos/Visi_Ramiro_Garcia_color.png"
-},
+}, 
 {
     "nombre": "María José Rodilla León",
     "residencia": "Ciudad de México",
@@ -533,7 +560,7 @@ const data = [
     "foto_bn": "fotos/Candela_Sanchez_bn.png",
     "foto_color": "fotos/Candela_Sanchez_color.png"
 },
-   {
+{
     "nombre": "Felisa Santos Hurtado",
     "residencia": "Navalmoral de la Mata",
     "foto_bn": "fotos/Felisa_Santos_Hurtado_bn.png",
@@ -556,7 +583,7 @@ const data = [
     "residencia": "Cáceres",
     "foto_bn": "fotos/Montserrat_Torres_Rosado_bn.png",
     "foto_color": "fotos/Montserrat_Torres_Rosado_color.png"
-},   
+},
 {
     "nombre": "Isabel Valderde Merino",
     "residencia": "Valdefuentes",
@@ -569,18 +596,18 @@ const data = [
     "foto_bn": "fotos/Prado_Villa_Maya_bn.png",
     "foto_color": "fotos/Prado_Villa_Maya_color.png"
 },
-   {
+{
     "nombre": "Florinda Vivas Jiménez",
     "residencia": "Cáceres",
     "foto_bn": "fotos/Florinda_Vivas_Jimenez_bn.png",
     "foto_color": "fotos/Florinda_Vivas_Jimenez_color.png"
 },
- {
+{
     "nombre": "Rita Vivas Vivas",
     "residencia": "Madrid",
     "foto_bn": "fotos/Rita_Vivas_Vivas_bn.png",
     "foto_color": "fotos/Rita_Vivas_Vivas_color.png"
-}  
+}
 
 ];
 
